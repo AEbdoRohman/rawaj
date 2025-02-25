@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+:root {
+  --primary: #785f9a;
+  --secondary: #b0807e;
+  --color: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Cairo", sans-serif;
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: right;
+  direction: rtl;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.clientsSwiper {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.client-slide {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* Animation */
+
+.up-down-animation {
+  display: inline-block;
+  animation: bounceVertical 2s ease-in-out infinite;
+  -webkit-animation: bounceVertical 2s ease-in-out infinite;
+}
+
+@keyframes bounceVertical {
+  0%,
+  100% {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+    -webkit-transform: translateY(-8px);
+    -moz-transform: translateY(-8px);
+    -ms-transform: translateY(-8px);
+    -o-transform: translateY(-8px);
+  }
+}
+
+.arrow-animation {
+  display: inline-block;
+  animation: bounceHorizontal 2s ease-in-out infinite;
+  -webkit-animation: bounceHorizontal 2s ease-in-out infinite;
+}
+
+@keyframes bounceHorizontal {
+  0%,
+  100% {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-8px);
+    -webkit-transform: translateX(-8px);
+    -moz-transform: translateX(-8px);
+    -ms-transform: translateX(-8px);
+    -o-transform: translateX(-8px);
+  }
+}
+/* Custom Select Style */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.select:hover {
+  background-color: var(--hover-bg);
+  color: white;
+  cursor: pointer;
+}
