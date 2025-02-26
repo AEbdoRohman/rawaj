@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import HomeTitle from "../../../componants/HomeTitle";
 
 const HowUse = ({ bgColor }) => {
   const OurValues = [
@@ -35,7 +36,7 @@ const HowUse = ({ bgColor }) => {
   return (
     <section
       id="how_use"
-      className="mt-4 md:mt-20 py-10 px-4 md:px-8 overflow-hidden"
+      className="mt-14 md:mt-28 py-10 px-4 md:px-8 overflow-hidden"
       style={{ backgroundColor: bgColor }}
     >
       <div
@@ -43,19 +44,13 @@ const HowUse = ({ bgColor }) => {
         ref={ref}
       >
         {/* title */}
-        <motion.div
-          className="w-full text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 30 }}
-          transition={{ duration: 1 }}
-        >
-          <p className="text-5xl text-primary font-bold mb-1">مين احنا </p>
-          <span className="bg-primary inline-block h-1 w-16"></span>
-          <p className="text-gray-700 text-lg mt-4">
+        <HomeTitle
+          title="من نحن"
+          subtitle="
             احنا وكالة رواج للتسويق الإلكتروني , نقدم حلول تسويقية إبداعية منذ
             عام 2020, في منطقة عسير
-          </p>
-        </motion.div>
+          "
+        />
 
         {/* card */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

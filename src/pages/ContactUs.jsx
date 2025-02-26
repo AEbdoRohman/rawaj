@@ -25,7 +25,7 @@ const ContactUs = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="mt-4 md:mt-20 overflow-hidden">
+    <div className="mt-28 md:mt-20 overflow-hidden">
       <motion.div
         className="container mx-auto px-4 mt-4 md:my-16"
         initial="hidden"
@@ -120,18 +120,18 @@ const ContactUs = () => {
           </motion.form>
         </motion.div>
         <motion.div
-          className="flex items-center justify-center gap-4 px-4 md:px-4  rounded-lg"
+          className="flex items-center justify-center gap-4 px-4 rounded-lg"
           variants={containerVariants}
         >
           <motion.div className="mt-8" variants={itemVariants}>
             <div className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-4 bg-gray-200 rounded-xl">
-              <div className="relative mb-2 flex flex-col items-center  p-2 rounded-md">
+              <div className="relative p-2 mx-4 mb-2 flex flex-col items-center rounded-md">
                 <span className="absolute -top-8 p-6 mb-8 bg-main_text text-white rounded-full">
                   <FaPhoneAlt size={30} />
                 </span>
                 <a
                   href="https://wa.me/966544293033"
-                  className="text-2xl text-main_text px-10 py-6 pt-16 rounded-lg "
+                  className="text-2xl text-main_text px-4 md:px-10 py-6 pt-16 rounded-lg "
                 >
                   0544293033
                 </a>
@@ -142,7 +142,7 @@ const ContactUs = () => {
                 </span>
                 <a
                   href="mailto:rawahworld0@gmail.com"
-                  className="text-2xl text-main_text px-10 py-4 pt-16 rounded-lg "
+                  className="text-2xl text-main_text px-4 md:px-10 py-4 pt-16 rounded-lg "
                 >
                   Rawahworld0@gmail.com{" "}
                 </a>
@@ -151,7 +151,7 @@ const ContactUs = () => {
                 <span className="absolute -top-8 p-6 mb-8 bg-main_text text-white rounded-full">
                   <FaMapMarkerAlt size={30} />
                 </span>
-                <p className="text-2xl text-main_text px-10 py-4 pt-16 rounded-lg ">
+                <p className="text-2xl text-main_text px-4 md:px-10 py-4 pt-16 rounded-lg ">
                   خميس مشيط _ حي الجامعيين
                 </p>
               </div>

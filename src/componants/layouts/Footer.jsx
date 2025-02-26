@@ -10,9 +10,12 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer id="contact" className=" bg-[#E5E7EB] px-4 md:px-0 pt-16 pb-6 mt-8">
+    <footer
+      id="contact"
+      className=" bg-[#E5E7EB] px-4 md:px-0 pt-8 md:pt-16 pb-6 mt-8"
+    >
       <div className="container mx-auto py-6px-2 md:px-0 z-30">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3   gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3   gap-4 md:gap-8">
           {/* Company Info */}
           <div>
             <div className="mb-4 flex justify-center md:justify-start ">
@@ -97,7 +100,7 @@ const Footer = () => {
           </div>
         </div>
         {/* Social Media */}
-        <div className="flex gap-2 justify-center mt-8">
+        <div className="flex gap-2 justify-center mt-4 md:mt-8">
           <a
             href="https://www.tiktok.com/@rawaj_world"
             target="_blank"

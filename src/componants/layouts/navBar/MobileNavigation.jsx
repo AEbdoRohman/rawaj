@@ -1,8 +1,12 @@
+/* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-/* eslint-disable react/prop-types */
-const MobileNavigation = ({ isMenuOpen, setIsMenuOpen, isScrolled }) => {
+const MobileNavigation = ({ isMenuOpen, setIsMenuOpen }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (isMenuOpen) {
       document.body.classList.add("no-scroll");
@@ -10,11 +14,33 @@ const MobileNavigation = ({ isMenuOpen, setIsMenuOpen, isScrolled }) => {
       document.body.classList.remove("no-scroll");
     }
   }, [isMenuOpen]);
+
+  // scroll to section
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // navigate to section
+  const handleNavigation = (sectionId) => {
+    setIsMenuOpen(false); // Close the menu
+
+    if (location.pathname === "/") {
+      scrollToSection(sectionId);
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 100);
+    }
+  };
+
   return (
     <nav
-      className={`md:hidden fixed top-0 left-0 w-full h-screen  shadow-md transition-transform duration-500 ease-in-out bg-black opacity-90 ${
-        isMenuOpen ? "translate-y-0 pt-12" : "-translate-y-full"
-      } ${isScrolled ? " text-white" : ""}
+      className={`md:hidden fixed top-0 left-0 w-10/12 h-screen text-white bg-black opacity-90 transition-transform duration-500 ease-in-out ${
+        isMenuOpen ? "translate-x-0 pt-12" : "-translate-x-full"
       }`}
     >
       <div>
@@ -24,32 +50,47 @@ const MobileNavigation = ({ isMenuOpen, setIsMenuOpen, isScrolled }) => {
 
         <ul className="text-xl flex flex-col items-center gap-6 pt-16">
           <li>
-            <a
-              href="/"
+            <Link
+              to="/"
               className="text-white hover:text-secondary transition"
               onClick={() => setIsMenuOpen(false)}
             >
-              الصفحة الرئيسية
-            </a>
+              الرئيسية
+            </Link>
           </li>
           <li>
-            <a
-              href="#about"
+            <button
+              className="text-white hover:text-secondary transition"
+              onClick={() => handleNavigation("how_use")}
+            >
+              من نحن
+            </button>
+          </li>
+          <li>
+            <button
+              className="text-white hover:text-secondary transition"
+              onClick={() => handleNavigation("services")}
+            >
+              خدماتنا
+            </button>
+          </li>
+          <li>
+            <Link
+              to="/projects"
               className="text-white hover:text-secondary transition"
               onClick={() => setIsMenuOpen(false)}
             >
-              عن الشركة
-            </a>
+              مشاريعنا
+            </Link>
           </li>
-
           <li>
-            <a
-              href="#contact"
+            <Link
+              to="/contactUs"
               className="text-white hover:text-secondary transition"
               onClick={() => setIsMenuOpen(false)}
             >
               تواصل معنا
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

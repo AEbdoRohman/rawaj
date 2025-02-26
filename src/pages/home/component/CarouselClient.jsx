@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
+import HomeTitle from "../../../componants/HomeTitle";
 
 const CarouselClient = () => {
   const OurValues = [
@@ -27,14 +28,10 @@ const CarouselClient = () => {
   ];
 
   return (
-    <section className="container mx-auto px-8 my-8">
+    <section className="container mx-auto px-8 mb-8 md:mt-20">
       {/* title */}
-      <div className="w-full text-center">
-        <h1 className="text-lg md:text-5xl text-primary font-bold ">
-          أبرز عملاؤنا
-        </h1>
-        <span className="bg-main_text inline-block h-1 w-16"></span>
-      </div>
+      <HomeTitle title="أبرز عملاؤنا" />
+
       <Swiper
         modules={[Pagination, Navigation, Autoplay]}
         breakpoints={{

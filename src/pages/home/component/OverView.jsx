@@ -41,6 +41,7 @@ const OverView = () => {
           <div className="mt-8">
             <Button
               buttonText="تواصل معنا"
+              path="/contactUs"
               color="var(--primary)"
               hoverBg="var(--secondary)"
               hoverColor="white"

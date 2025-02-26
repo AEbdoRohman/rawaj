@@ -1,36 +1,37 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import HomeTitle from "../../../componants/HomeTitle";
+import { useEffect, useState } from "react";
+
 import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
 } from "react-icons/md";
-import Button from "../../../componants/button/Button";
 
-const Projects = () => {
+const ProjectsPage = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [direction, setDirection] = useState(1); // 1: next, -1: prev
 
   const certificates = [
-    {
-      id: 1,
-      image: "/Project/10.png",
-      title: "Project 1",
-    },
-    { id: 2, image: "/Project/12.png", title: "Project 2" },
-    { id: 3, image: "/Project/13.png", title: "Project 3" },
-    { id: 4, image: "/Project/14.png", title: "Project 4" },
+    { id: 1, image: "/Project/10.png", title: "Project 1" },
+    { id: 2, image: "/Project/11.png", title: "Project 2" },
+    { id: 3, image: "/Project/12.png", title: "Project 2" },
+    { id: 4, image: "/Project/13.png", title: "Project 3" },
+    { id: 5, image: "/Project/14.png", title: "Project 4" },
+    { id: 6, image: "/Project/15.png", title: "Project 4" },
+    { id: 7, image: "/Project/16.png", title: "Project 4" },
   ];
 
+  // Function to open the lightbox
   const openImage = (index) => {
     setSelectedIndex(index);
   };
 
+  // Function to close the lightbox
   const nextImage = () => {
     setDirection(1);
     setSelectedIndex((prevIndex) => (prevIndex + 1) % certificates.length);
   };
 
+  // Function to close the lightbox
   const prevImage = () => {
     setDirection(-1);
     setSelectedIndex((prevIndex) =>
@@ -38,41 +39,45 @@ const Projects = () => {
     );
   };
 
+  // Animation for the lightbox
+  const imageVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="mb-8 md:mt-16">
-      <HomeTitle title="مشاريعنا" />
+    <div className="mt-32 md:mt-40">
       <div className="container mx-auto my-10 px-4">
-        <div>
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            initial="hidden"
-            animate="visible"
-            transition={{ staggerChildren: 0.2 }}
-          >
-            {certificates.map((cert, index) => (
-              <motion.div
-                key={cert.id}
-                className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer"
-                onClick={() => openImage(index)}
-              >
-                <img
-                  src={cert.image}
-                  alt={cert.title}
-                  className="w-full object-cover transition-transform duration-300"
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-          <div className="flex justify-center mt-10">
-            <Button
-              buttonText="عرض المزيد"
-              path="/projects"
-              color="var(--primary)"
-              hoverBg="var(--secondary)"
-              hoverColor="white"
-            />
-          </div>
-        </div>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          initial="hidden"
+          animate="visible"
+          transition={{ staggerChildren: 0.2 }}
+        >
+          {certificates.map((cert, index) => (
+            <motion.div
+              key={cert.id}
+              className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer"
+              variants={imageVariants}
+              whileHover={{ scale: 1.05 }}
+              onClick={() => openImage(index)}
+            >
+              <motion.img
+                src={cert.image}
+                alt={cert.title}
+                className="w-full object-cover transition-transform duration-300"
+              />
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Lightbox */}
         <AnimatePresence>
@@ -133,4 +138,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default ProjectsPage;

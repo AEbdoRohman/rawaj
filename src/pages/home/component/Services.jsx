@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import HomeTitle from "../../../componants/HomeTitle";
 
 const Services = ({ bgColor }) => {
   const OurAdvantage = [
@@ -28,7 +29,7 @@ const Services = ({ bgColor }) => {
   return (
     <section
       id="services"
-      className="mt-4 md:mt-20 py-10 px-4 md:px-8 overflow-hidden"
+      className="mt-8 md:mt-16 py-10 px-4 md:px-8 overflow-hidden"
       style={{ backgroundColor: bgColor }}
     >
       <div
@@ -36,17 +37,7 @@ const Services = ({ bgColor }) => {
         ref={ref}
       >
         {/* title */}
-        <motion.div
-          className="w-full text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 30 }}
-          transition={{ duration: 1 }}
-        >
-          <h1 className="text-lg md:text-5xl text-primary font-bold mb-2">
-            خدماتنا
-          </h1>
-          <span className="bg-primary inline-block h-1 w-16"></span>
-        </motion.div>
+        <HomeTitle title="خدماتنا" />
 
         {/* cards container */}
         <motion.div
