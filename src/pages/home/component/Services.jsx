@@ -5,10 +5,36 @@ import HomeTitle from "../../../componants/HomeTitle";
 
 const Services = ({ bgColor }) => {
   const OurAdvantage = [
-    { id: 1, icon: "/1.png", value: "إدارة حسابات السوشيال ميديا" },
-    { id: 2, icon: "/2.png", value: "صناعة الأحداث" },
-    { id: 3, icon: "/3.png", value: "إطلاق وإدارة الحملات الاعلانية الممولة" },
-    { id: 4, icon: "/4.png", value: "إدارة المؤثرين" },
+    {
+      id: 1,
+      icon: "/1.png",
+      value: "إدارة حسابات السوشيال ميديا",
+      dec: `تحديد الأهداف
+          تحليل الجمهور 
+            كتابة المحتوى 
+            تصوير صور 
+            تصميم الصور 
+            تصوير فيديو 
+            مونتاج الفيديوهات
+            النشر والرصد 
+            متابعة الاداء
+            ادارة التعليقات`,
+    },
+    {
+      id: 3,
+      icon: "/3.png",
+      value: "إطلاق وإدارة الحملات الاعلانية الممولة",
+      dec: `تحديد الهدف
+            تحليل الجمهور
+            كتابة المحتوى الاعلاني
+            تصوير فيديو اعلاني
+            مونتاج 
+            اختبار مكان الظهور 
+            تحديد الميزانية 
+            تنفيذ الحملة
+        متابعة الأداء
+الظهور الاول في محركات البحث`,
+    },
   ];
 
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
@@ -41,7 +67,7 @@ const Services = ({ bgColor }) => {
 
         {/* cards container */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full items-start"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full items-start"
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -54,18 +80,25 @@ const Services = ({ bgColor }) => {
               whileHover={{ y: -10 }}
             >
               {/* icon */}
-              <div className="w-full flex items-center justify-center">
+              <div className="w-80 h-80 flex items-center justify-center">
                 <img
                   src={value.icon}
                   alt={value.value}
-                  className="w-full object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
-
+              {/* text-gray-600 text-xl px-2 leading-relaxed min-h-[80px] flex items-center */}
               {/* desc */}
-              <h1 className="text-gray-600 text-xl px-2 leading-relaxed min-h-[80px] flex items-center">
-                {value.value}
-              </h1>
+              <div className="p-4">
+                <h1 className="text-main_text text-xl md:text-2xl font-bold px-2 ">
+                  {value.value}
+                </h1>
+                <p className="grid grid-cols-2 gap-x-16 gap-y-4 mt-4 text-gray-800">
+                  {value.dec.split("\n").map((line, index) => (
+                    <span key={index}>{line}</span>
+                  ))}
+                </p>
+              </div>
             </motion.div>
           ))}
         </motion.div>
