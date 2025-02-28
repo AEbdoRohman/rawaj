@@ -1,8 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
 
 const ContactUs = () => {
+  const [notification, setNotification] = useState({
+    show: false,
+    message: "",
+    type: "",
+  });
   // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -21,6 +27,46 @@ const ContactUs = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
   };
 
+  const form = useRef();
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_rynfv7q",
+        "template_hvg8btt",
+        form.current,
+        "t9IOUBk734F5oPK5T"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          e.target.reset();
+
+          setNotification({
+            show: true,
+            message: "تم ارسال الرسالة بنجاح",
+            type: "success",
+          });
+          setTimeout(() => {
+            setNotification({ show: false, message: "", type: "" });
+          }, 3000);
+        },
+        (error) => {
+          console.log(error.text);
+
+          setNotification({
+            show: true,
+            message: "حدث خطأ اثناء ارسال الرسالة",
+            type: "error",
+          });
+          setTimeout(() => {
+            setNotification({ show: false, message: "", type: "" });
+          }, 3000);
+        }
+      );
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -36,7 +82,12 @@ const ContactUs = () => {
           className="flex items-center justify-center gap-4 px-4 md:px-4 mb-28 rounded-lg"
           variants={containerVariants}
         >
-          <motion.form className="w-full md:w-2/3" variants={itemVariants}>
+          <motion.form
+            ref={form}
+            onSubmit={sendEmail}
+            className="w-full md:w-2/3"
+            variants={itemVariants}
+          >
             <div className="mb-4">
               <label htmlFor="name" className="block text-xl font-medium mb-2">
                 اسم الشركة
@@ -44,7 +95,7 @@ const ContactUs = () => {
               <motion.input
                 type="text"
                 id="name"
-                name="name"
+                name="user_name"
                 placeholder="اسم الشركة"
                 required
                 className="w-full p-3 border border-gray-300 rounded-md outline-none"
@@ -70,7 +121,7 @@ const ContactUs = () => {
               <motion.input
                 type="email"
                 id="email"
-                name="email"
+                name="user_email"
                 placeholder="البريد الالكتروني"
                 required
                 className="w-full p-3 border border-gray-300 rounded-md outline-none"
@@ -117,6 +168,18 @@ const ContactUs = () => {
                 ارسال
               </button>
             </motion.div>
+
+            {notification.show && (
+              <motion.div
+                className={`notification ${notification.type}`} // إضافة نوع الإشعار (نجاح أو خطأ)
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {notification.message}
+              </motion.div>
+            )}
           </motion.form>
         </motion.div>
         <motion.div
