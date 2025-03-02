@@ -7,50 +7,37 @@ const Services = ({ bgColor }) => {
   const OurAdvantage = [
     {
       id: 1,
-      icon: "/1.png",
+      icon: "/social.gif",
       value: "إدارة حسابات السوشيال ميديا",
       dec: `تحديد الأهداف
           تحليل الجمهور 
-            كتابة المحتوى 
-            تصوير صور 
-            تصميم الصور 
-            تصوير فيديو 
-            مونتاج الفيديوهات
-            النشر والرصد 
-            متابعة الاداء
-            ادارة التعليقات`,
+          كتابة المحتوى 
+          تصوير صور 
+          تصميم الصور 
+          تصوير فيديو 
+          مونتاج الفيديوهات
+          النشر والرصد 
+          متابعة الاداء
+          ادارة التعليقات`,
     },
     {
       id: 3,
-      icon: "/3.png",
+      icon: "/compition.gif",
       value: "إطلاق وإدارة الحملات الاعلانية الممولة",
       dec: `تحديد الهدف
-            تحليل الجمهور
-            كتابة المحتوى الاعلاني
-            تصوير فيديو اعلاني
-            مونتاج 
-            اختبار مكان الظهور 
-            تحديد الميزانية 
-            تنفيذ الحملة
-        متابعة الأداء
-الظهور الاول في محركات البحث`,
+          تحليل الجمهور
+          كتابة المحتوى الاعلاني
+          تصوير فيديو اعلاني
+          مونتاج 
+          اختبار مكان الظهور 
+          تحديد الميزانية 
+          تنفيذ الحملة
+          متابعة الأداء
+          الظهور الاول في محركات البحث`,
     },
   ];
 
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.3 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
 
   return (
     <section
@@ -66,42 +53,52 @@ const Services = ({ bgColor }) => {
         <HomeTitle title="خدماتنا" />
 
         {/* cards container */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full items-start"
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
-          {OurAdvantage.map((value) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full items-start">
+          {OurAdvantage.map((value, index) => (
             <motion.div
               key={value.id}
-              className="bg-[#E5E7EB] rounded-xl cursor-pointer transition-all flex flex-col items-center text-center"
-              variants={itemVariants}
-              whileHover={{ y: -10 }}
+              className="bg-[#E5E7EB] rounded-xl shadow-sm flex flex-col items-center text-center p-6"
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              animate={{
+                opacity: inView ? 1 : 0,
+                x: inView ? 0 : index % 2 === 0 ? -50 : 50,
+              }}
+              transition={{ duration: 1, delay: 0.2 * index, ease: "easeOut" }} // تحسين السلاسة
             >
               {/* icon */}
-              <div className="w-80 h-80 flex items-center justify-center">
+              <div className="w-full h-72 flex items-center justify-center">
                 <img
                   src={value.icon}
                   alt={value.value}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
-              {/* text-gray-600 text-xl px-2 leading-relaxed min-h-[80px] flex items-center */}
+
               {/* desc */}
               <div className="p-4">
-                <h1 className="text-main_text text-xl md:text-2xl font-bold px-2 ">
+                <h1 className="text-main_text text-xl md:text-2xl font-bold px-2">
                   {value.value}
                 </h1>
-                <p className="grid grid-cols-2 gap-x-16 gap-y-4 mt-4 text-gray-800">
-                  {value.dec.split("\n").map((line, index) => (
-                    <span key={index}>{line}</span>
+                <div className="grid grid-cols-2 gap-x-16 gap-y-4 mt-4 text-gray-800">
+                  {value.dec.split("\n").map((line, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : -10 }}
+                      transition={{
+                        duration: 0.4,
+                        delay: 0.1 * i,
+                        ease: "easeOut",
+                      }}
+                    >
+                      {line}
+                    </motion.span>
                   ))}
-                </p>
+                </div>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
